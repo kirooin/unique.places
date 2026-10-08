@@ -1,1 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: PlayFairDisplay;
+  src: url("../public/fonts/PlayfairDisplay.ttf")
+}
+
+@font-face {
+  font-family: OnestRegular;
+  src: url("../public/fonts/Onest-Regular.ttf");
+}
+
+@font-face {
+  font-family: OnestSemiBold;
+  src: url("../public/fonts/Onest-SemiBold.ttf");
+}
+
+
+@font-face {
+  font-family: OnestBold;
+  src: url("../public/fonts/Onest-Bold.ttf");
+}
+
+body {
+  font-family: OnestRegular, sans-serif;
+}
+
+button {
+  cursor: pointer;
+}
