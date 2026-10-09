@@ -25,42 +25,63 @@
   <section class="products">
     <div class="container products__container">
       <div class="products__grid">
-        <div class="card">
-          <div class="card__header">
+        @for (card of cards; track card.id) {
+          <div class="card"  [class.open]="card.isExpanded">
+            <div class="card__header">
 
-            <div class="card__image">
-              <img src="images/test_product_img.png" alt="test">
-            </div>
-
-          </div>
-
-          <div class="card__body">
-            <h3 class="card__title">Aegean Hideaway</h3>
-            <div class="card__place">Отель</div>
-            <div class="card__country">Имеровигли, Греция</div>
-            <div class="card__rating">
-              <div class="card__count">
-                <img src="images/card_star.png" alt="Star"> 5.0
+              <div class="card__image">
+                <img src="{{card.image}}" alt="test">
               </div>
-              <div class="card__euros">€</div>
+
             </div>
-            <div class="card__badges">
-              <div class="card__badge">Скала</div>
-              <div class="card__badge">Панорамный вид</div>
-              <div class="card__badge">Тихое место</div>
-            </div>
-            <div class="card__text">
-              Отель, высеченный прямо в скале над морем, где из каждого номера открывается панорамный вид на бескрайний
-              горизонт. Пространство словно становится частью природного ландшафта, а мягкий свет и натуральные
-              материалы
-            </div>
-            <div class="card__more">
-              Подробнее
+
+            <div class="card__body" [class.open]="card.isExpanded">
+              <h3 class="card__title">{{ card.title }}</h3>
+              <div class="card__place">{{ card.place }}</div>
+              <div class="card__country">{{ card.country }}</div>
+              <div class="card__rating">
+                <div class="card__count">
+                  <img src="images/card_star.png" alt="Star"> {{ card.rating }}
+                </div>
+                <div class="card__euros">{{ card.euros }}</div>
+              </div>
+              <div class="card__badges">
+                @for (badge of card.badges; let i = $index; track i) {
+                  <div class="card__badge">{{ badge }}</div>
+                }
+              </div>
+              <div class="card__text">
+                {{ card.text }}
+              </div>
+              <div class="card__footer" (click)="toggle(card)">
+                <div class="card__more">
+                  @if (card.isExpanded) {
+                    Скрыть
+                  } @else {
+                    Подробнее
+                  }
+                </div>
+              </div>
             </div>
           </div>
-
-        </div>
+        }
       </div>
     </div>
   </section>
+  <footer class="footer">
+    <div class="container footer__container">
+      <div class="footer__logo">
+        <a href="#">
+          <img src="images/logo.png" alt="Logo">
+        </a>
+        <div class="footer__copyright">
+          © 2026 unique.places
+        </div>
+      </div>
+      <div class="footer__media">
+        <a href="#">Pinterest</a>
+        <a href="#">Telegram</a>
+      </div>
+    </div>
+  </footer>
 </main>
