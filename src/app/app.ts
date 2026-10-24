@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Card } from '../types/card.type';
+import { PlaceCard } from './components/place-card/place-card';
 
 @Component({
-  imports: [],
+  imports: [PlaceCard],
   selector: 'app-root',
   styleUrl: './app.scss',
   templateUrl: './app.html',
@@ -11,8 +12,8 @@ import { Card } from '../types/card.type';
 export class App {
   isExpanded: boolean = false;
 
-  toggle(card: Card): void {
-   card.isExpanded = !card.isExpanded;
+  toggleCard(card: Card): void {
+    card.isExpanded = !card.isExpanded;
   }
 
   cards: Card[] = [

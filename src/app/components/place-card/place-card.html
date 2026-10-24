@@ -1,0 +1,38 @@
+<div class="card"  [class.open]="card().isExpanded">
+  <div class="card__header">
+
+    <div class="card__image">
+      <img src="{{card().image}}" alt="test">
+    </div>
+
+  </div>
+
+  <div class="card__body" [class.open]="card().isExpanded">
+    <h3 class="card__title">{{ card().title }}</h3>
+    <div class="card__place">{{ card().place }}</div>
+    <div class="card__country">{{ card().country }}</div>
+    <div class="card__rating">
+      <div class="card__count">
+        <img src="images/card_star.png" alt="Star"> {{ card().rating }}
+      </div>
+      <div class="card__euros">{{ card().euros }}</div>
+    </div>
+    <div class="card__badges">
+      @for (badge of card().badges; let i = $index; track i) {
+        <div class="card__badge">{{ badge }}</div>
+      }
+    </div>
+    <div class="card__text">
+      {{ card().text }}
+    </div>
+    <div class="card__footer" (click)="toggle()">
+      <div class="card__more">
+        @if (card().isExpanded) {
+          Скрыть
+        } @else {
+          Подробнее
+        }
+      </div>
+    </div>
+  </div>
+</div>
