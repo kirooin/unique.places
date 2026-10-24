@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { Card } from '../types/card.type';
 import { PlaceCard } from './components/place-card/place-card';
+import { Filter } from '../types/filter.type';
 
 @Component({
   imports: [PlaceCard],
@@ -10,13 +11,13 @@ import { PlaceCard } from './components/place-card/place-card';
   standalone: true,
 })
 export class App {
-  isExpanded: boolean = false;
+  // isExpanded: boolean = false;
 
   toggleCard(card: Card): void {
     card.isExpanded = !card.isExpanded;
   }
 
-  cards: Card[] = [
+  cards = signal<Card[]>([
     {
       title: 'Aegean Hideaway',
       place: 'Отель',
@@ -89,5 +90,43 @@ export class App {
       id: 6,
       isExpanded: false,
     },
-  ];
+  ]);
+
+  filters = signal<Filter[]>([
+    {
+      id: 1,
+      name: 'Все',
+      selected: true,
+    },
+    {
+      id: 2,
+      name: 'Отели',
+      selected: false,
+    },
+    {
+      id: 3,
+      name: 'Рестораны',
+      selected: false,
+    },
+    {
+      id: 4,
+      name: 'Природа',
+      selected: false,
+    },
+    {
+      id: 5,
+      name: 'Культура',
+      selected: false,
+    },
+    {
+      id: 6,
+      name: 'Архитектура',
+      selected: false,
+    },
+    {
+      id: 7,
+      name: 'СПА и релакс',
+      selected: false,
+    },
+  ]);
 }

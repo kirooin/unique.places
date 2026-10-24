@@ -21,11 +21,20 @@
       </div>
     </div>
   </section>
+  <section class="filters">
+    <div class="container filters__container">
+      <div class="filters__list">
+        @for (filter of filters(); track filter.id) {
+          <button type="button" class="filters__btn">{{ filter.name }}</button>
+        }
+      </div>
+    </div>
+  </section>
 
   <section class="products">
     <div class="container products__container">
       <div class="products__grid">
-        @for (card of cards; track card.id) {
+        @for (card of cards(); track card.id) {
          <app-place-card [card]="card" (toggle)="toggleCard($event)"/>
         }
       </div>
