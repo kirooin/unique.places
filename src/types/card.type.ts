@@ -1,4 +1,6 @@
-export type Card = {
+import { CategoryType } from './category.type';
+
+export type CardType = {
   title: string,
   place: string,
   country: string,
@@ -9,4 +11,5 @@ export type Card = {
   image: string,
   id: number,
   isExpanded: boolean,
+  category: CategoryType;
 }

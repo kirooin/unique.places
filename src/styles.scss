@@ -3,6 +3,11 @@
   padding: 0;
 }
 
+.container {
+  max-width: 1680px;
+  margin: 0 auto;
+}
+
 @font-face {
   font-family: PlayFairDisplay;
   src: url("../public/fonts/PlayfairDisplay.ttf")

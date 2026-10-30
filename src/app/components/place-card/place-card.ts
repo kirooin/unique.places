@@ -1,5 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import { Card } from '../../../types/card.type';
+import { CardType } from '../../../types/card.type';
 
 @Component({
   imports: [],
@@ -9,8 +9,8 @@ import { Card } from '../../../types/card.type';
   standalone: true,
 })
 export class PlaceCard {
-  card = input.required<Card>()
-  toggled = output<Card>({alias: 'toggle'})
+  card = input.required<CardType>()
+  toggled = output<CardType>({alias: 'toggle'})
 
 
   toggle() {

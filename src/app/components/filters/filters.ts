@@ -1,0 +1,33 @@
+import { Component, input, output } from '@angular/core';
+import { FilterType } from '../../../types/filter.type';
+import { NgClass } from '@angular/common';
+
+@Component({
+  imports: [NgClass],
+  selector: 'app-filters',
+  styleUrl: './filters.scss',
+  template: `
+    <button type="button"
+            (click)="toggle(); select()"
+            [ngClass]="[
+            'filters__btn',
+            filter().selected ? 'filters__btn_selected' : '',
+       ]">
+      {{ filter().name }}
+    </button>
+  `,
+  standalone: true,
+})
+export class Filters {
+  filter = input.required<FilterType>({ alias: 'filters' });
+  toggled = output<FilterType>({alias: 'toggle'});
+  selected = output<string>({alias: 'select'});
+
+  toggle() {
+    this.toggled.emit(this.filter());
+  }
+
+  select() {
+    this.selected.emit(this.filter().name)
+  }
+}

@@ -1,7 +1,4 @@
-.container {
-  max-width: 1680px;
-  margin: 0 auto;
-}
+
 
 .page {
   min-height: 100vh;
@@ -60,6 +57,7 @@
     }
   }
 
+
   .filters {
     &__container {
       padding: 60px 0 20px 0;
@@ -71,20 +69,9 @@
       gap: 16px;
     }
 
-    &__btn {
-      font-family: OnestRegular, sans-serif;
-      padding: 8px 20px;
-      background-color: #FDFDFB;
-      color: #222727;
-      border: 1px solid #404141;
-      border-radius: 1000px;
 
-      &_selected {
-        background: #E8D8B8;
-        border-color: #E8D8B8;
-      }
-    }
   }
+
 
   .products {
 

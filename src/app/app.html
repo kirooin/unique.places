@@ -21,22 +21,27 @@
       </div>
     </div>
   </section>
+
+
   <section class="filters">
     <div class="container filters__container">
       <div class="filters__list">
         @for (filter of filters(); track filter.id) {
-          <button type="button" class="filters__btn">{{ filter.name }}</button>
+          <app-filters [filters]="filter" (click)="toggleFilter(filter); selectFilter(filter.name)"
+          />
         }
       </div>
     </div>
   </section>
 
+
   <section class="products">
     <div class="container products__container">
       <div class="products__grid">
-        @for (card of cards(); track card.id) {
-         <app-place-card [card]="card" (toggle)="toggleCard($event)"/>
-        }
+          @for (card of filteredCards(); track card.id) {
+            <app-place-card [card]="card" (toggle)="toggleCard($event)" />
+          }
+
       </div>
     </div>
   </section>

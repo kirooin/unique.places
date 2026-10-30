@@ -1,5 +1,7 @@
-export type Filter = {
+import { CategoryType } from './category.type';
+
+export type FilterType = {
   id: number,
-  name: string,
+  name: CategoryType | 'Все',
   selected: boolean,
 }

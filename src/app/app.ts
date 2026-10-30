@@ -1,23 +1,26 @@
-import { Component, signal } from '@angular/core';
-import { Card } from '../types/card.type';
+import { Component, computed, signal } from '@angular/core';
+import { CardType } from '../types/card.type';
 import { PlaceCard } from './components/place-card/place-card';
-import { Filter } from '../types/filter.type';
+import { FilterType } from '../types/filter.type';
+import { Filters } from './components/filters/filters';
+import { filter } from 'rxjs';
 
 @Component({
-  imports: [PlaceCard],
+  imports: [PlaceCard, Filters],
   selector: 'app-root',
   styleUrl: './app.scss',
   templateUrl: './app.html',
   standalone: true,
 })
 export class App {
-  // isExpanded: boolean = false;
+  selectedFilter = signal<string | null>(null);
 
-  toggleCard(card: Card): void {
-    card.isExpanded = !card.isExpanded;
-  }
-
-  cards = signal<Card[]>([
+  filteredCards = computed(() =>
+    this.selectedFilter() !== 'Все'
+      ? this.cards().filter((card => card.category === this.selectedFilter()))
+      : this.cards()
+  )
+  cards = signal<CardType[]>([
     {
       title: 'Aegean Hideaway',
       place: 'Отель',
@@ -29,6 +32,7 @@ export class App {
       image: 'images/test_product_img.png',
       id: 1,
       isExpanded: false,
+      category: 'Отели'
     },
     {
       title: 'Aqua Vista',
@@ -41,6 +45,7 @@ export class App {
       image: 'images/aqua_vista.png',
       id: 2,
       isExpanded: false,
+      category: 'Рестораны'
     },
     {
       title: 'Mist Springs',
@@ -53,6 +58,7 @@ export class App {
       image: 'images/mist_springs.png',
       id: 3,
       isExpanded: false,
+      category: 'СПА и релакс'
     },
     {
       title: 'Skyline Cinema',
@@ -65,6 +71,7 @@ export class App {
       image: 'images/skyline_cinema.png',
       id: 4,
       isExpanded: false,
+      category: 'Развлечения'
     },
     {
       title: 'Echoes of Stone',
@@ -77,6 +84,7 @@ export class App {
       image: 'images/echoes_of_stone.png',
       id: 5,
       isExpanded: false,
+      category: 'Культура'
     },
     {
       title: 'Aurora Glass Lodge',
@@ -89,10 +97,11 @@ export class App {
       image: 'images/aurora_glass.png',
       id: 6,
       isExpanded: false,
+      category: 'Отели'
     },
   ]);
 
-  filters = signal<Filter[]>([
+  filters = signal<FilterType[]>([
     {
       id: 1,
       name: 'Все',
@@ -110,23 +119,54 @@ export class App {
     },
     {
       id: 4,
-      name: 'Природа',
+      name: 'Развлечения',
       selected: false,
     },
     {
       id: 5,
-      name: 'Культура',
+      name: 'Природа',
       selected: false,
     },
     {
       id: 6,
-      name: 'Архитектура',
+      name: 'Культура',
       selected: false,
     },
     {
       id: 7,
+      name: 'Архитектура',
+      selected: false,
+    },
+    {
+      id: 8,
       name: 'СПА и релакс',
       selected: false,
     },
   ]);
+
+  toggleCard(card: CardType): void {
+    card.isExpanded = !card.isExpanded;
+  }
+
+  toggleFilter(filterToToggle: FilterType) {
+    if (filterToToggle.selected === true) {
+      return;
+    }
+
+    this.filters.update((filters) =>
+      filters.map((filter) =>
+        filter.id === filterToToggle.id
+          ? { ...filter, selected: !filter.selected }
+          : {
+              ...filter,
+              selected: false,
+            },
+      ),
+    );
+
+  }
+
+  selectFilter(filterName: string): void {
+    this.selectedFilter.set(filterName);
+  }
 }
