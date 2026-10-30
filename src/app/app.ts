@@ -13,10 +13,12 @@ import { filter } from 'rxjs';
   standalone: true,
 })
 export class App {
-  selectedFilter = signal<string | null>(null);
+
+  allStr = 'all'
+  selectedFilter = signal<string>(this.allStr);
 
   filteredCards = computed(() =>
-    this.selectedFilter() !== 'Все'
+    this.selectedFilter() !== this.allStr
       ? this.cards().filter((card => card.category === this.selectedFilter()))
       : this.cards()
   )
@@ -32,7 +34,7 @@ export class App {
       image: 'images/test_product_img.png',
       id: 1,
       isExpanded: false,
-      category: 'Отели'
+      category: 'hotels'
     },
     {
       title: 'Aqua Vista',
@@ -45,7 +47,7 @@ export class App {
       image: 'images/aqua_vista.png',
       id: 2,
       isExpanded: false,
-      category: 'Рестораны'
+      category: 'restaurants'
     },
     {
       title: 'Mist Springs',
@@ -58,7 +60,7 @@ export class App {
       image: 'images/mist_springs.png',
       id: 3,
       isExpanded: false,
-      category: 'СПА и релакс'
+      category: 'spa'
     },
     {
       title: 'Skyline Cinema',
@@ -71,7 +73,7 @@ export class App {
       image: 'images/skyline_cinema.png',
       id: 4,
       isExpanded: false,
-      category: 'Развлечения'
+      category: 'entertainment'
     },
     {
       title: 'Echoes of Stone',
@@ -84,7 +86,7 @@ export class App {
       image: 'images/echoes_of_stone.png',
       id: 5,
       isExpanded: false,
-      category: 'Культура'
+      category: 'culture'
     },
     {
       title: 'Aurora Glass Lodge',
@@ -97,7 +99,7 @@ export class App {
       image: 'images/aurora_glass.png',
       id: 6,
       isExpanded: false,
-      category: 'Отели'
+      category: 'hotels'
     },
   ]);
 
@@ -106,41 +108,49 @@ export class App {
       id: 1,
       name: 'Все',
       selected: true,
+      value: 'all'
     },
     {
       id: 2,
       name: 'Отели',
       selected: false,
+      value: 'hotels'
     },
     {
       id: 3,
       name: 'Рестораны',
       selected: false,
+      value: 'restaurants'
     },
     {
       id: 4,
       name: 'Развлечения',
       selected: false,
+      value: 'entertainment'
     },
     {
       id: 5,
       name: 'Природа',
       selected: false,
+      value: 'nature'
     },
     {
       id: 6,
       name: 'Культура',
       selected: false,
+      value: 'culture'
     },
     {
       id: 7,
       name: 'Архитектура',
       selected: false,
+      value: 'architecture'
     },
     {
       id: 8,
       name: 'СПА и релакс',
       selected: false,
+      value: 'spa'
     },
   ]);
 
@@ -164,9 +174,11 @@ export class App {
       ),
     );
 
+
+
   }
 
-  selectFilter(filterName: string): void {
-    this.selectedFilter.set(filterName);
+  selectFilter(filterValue: string): void {
+    this.selectedFilter.set(filterValue);
   }
 }

@@ -1,1 +1,2 @@
-export type CategoryType = 'Отели' | 'Рестораны' | 'Природа' | 'Культура' | 'Архитектура' | 'СПА и релакс' | 'Развлечения'
+export type CategoryType =
+  'hotels' | 'restaurants' | 'nature' | 'culture' | 'architecture' | 'spa' | 'entertainment';

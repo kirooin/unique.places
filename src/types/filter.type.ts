@@ -2,6 +2,7 @@ import { CategoryType } from './category.type';
 
 export type FilterType = {
   id: number,
-  name: CategoryType | 'Все',
+  name: string,
   selected: boolean,
+  value: CategoryType | 'all';
 }

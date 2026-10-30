@@ -27,7 +27,7 @@
     <div class="container filters__container">
       <div class="filters__list">
         @for (filter of filters(); track filter.id) {
-          <app-filters [filters]="filter" (click)="toggleFilter(filter); selectFilter(filter.name)"
+          <app-filters [filters]="filter" (click)="toggleFilter(filter); selectFilter(filter.value)"
           />
         }
       </div>
