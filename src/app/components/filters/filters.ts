@@ -8,7 +8,7 @@ import { NgClass } from '@angular/common';
   styleUrl: './filters.scss',
   template: `
     <button type="button"
-            (click)="toggle(); select()"
+            (click)="toggle()"
             [ngClass]="[
             'filters__btn',
             filter().selected ? 'filters__btn_selected' : '',
@@ -27,7 +27,4 @@ export class Filters {
     this.toggled.emit(this.filter());
   }
 
-  select() {
-    this.selected.emit(this.filter().name)
-  }
 }

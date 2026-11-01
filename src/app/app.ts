@@ -1,9 +1,8 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, effect, OnChanges, OnDestroy, signal } from '@angular/core';
 import { CardType } from '../types/card.type';
 import { PlaceCard } from './components/place-card/place-card';
 import { FilterType } from '../types/filter.type';
 import { Filters } from './components/filters/filters';
-import { filter } from 'rxjs';
 
 @Component({
   imports: [PlaceCard, Filters],
@@ -13,15 +12,13 @@ import { filter } from 'rxjs';
   standalone: true,
 })
 export class App {
+  private readonly likedCards = 'likedCards';
 
-  allStr = 'all'
+  allStr = 'all';
+
   selectedFilter = signal<string>(this.allStr);
+  likes = signal<number>(0);
 
-  filteredCards = computed(() =>
-    this.selectedFilter() !== this.allStr
-      ? this.cards().filter((card => card.category === this.selectedFilter()))
-      : this.cards()
-  )
   cards = signal<CardType[]>([
     {
       title: 'Aegean Hideaway',
@@ -34,7 +31,8 @@ export class App {
       image: 'images/test_product_img.png',
       id: 1,
       isExpanded: false,
-      category: 'hotels'
+      category: 'hotels',
+      liked: false,
     },
     {
       title: 'Aqua Vista',
@@ -47,7 +45,8 @@ export class App {
       image: 'images/aqua_vista.png',
       id: 2,
       isExpanded: false,
-      category: 'restaurants'
+      category: 'restaurants',
+      liked: false,
     },
     {
       title: 'Mist Springs',
@@ -60,7 +59,8 @@ export class App {
       image: 'images/mist_springs.png',
       id: 3,
       isExpanded: false,
-      category: 'spa'
+      category: 'spa',
+      liked: false,
     },
     {
       title: 'Skyline Cinema',
@@ -73,7 +73,8 @@ export class App {
       image: 'images/skyline_cinema.png',
       id: 4,
       isExpanded: false,
-      category: 'entertainment'
+      category: 'entertainment',
+      liked: false,
     },
     {
       title: 'Echoes of Stone',
@@ -86,7 +87,8 @@ export class App {
       image: 'images/echoes_of_stone.png',
       id: 5,
       isExpanded: false,
-      category: 'culture'
+      category: 'culture',
+      liked: false,
     },
     {
       title: 'Aurora Glass Lodge',
@@ -99,7 +101,8 @@ export class App {
       image: 'images/aurora_glass.png',
       id: 6,
       isExpanded: false,
-      category: 'hotels'
+      category: 'hotels',
+      liked: false,
     },
   ]);
 
@@ -108,51 +111,74 @@ export class App {
       id: 1,
       name: 'Все',
       selected: true,
-      value: 'all'
+      value: 'all',
     },
     {
       id: 2,
       name: 'Отели',
       selected: false,
-      value: 'hotels'
+      value: 'hotels',
     },
     {
       id: 3,
       name: 'Рестораны',
       selected: false,
-      value: 'restaurants'
+      value: 'restaurants',
     },
     {
       id: 4,
       name: 'Развлечения',
       selected: false,
-      value: 'entertainment'
+      value: 'entertainment',
     },
     {
       id: 5,
       name: 'Природа',
       selected: false,
-      value: 'nature'
+      value: 'nature',
     },
     {
       id: 6,
       name: 'Культура',
       selected: false,
-      value: 'culture'
+      value: 'culture',
     },
     {
       id: 7,
       name: 'Архитектура',
       selected: false,
-      value: 'architecture'
+      value: 'architecture',
     },
     {
       id: 8,
       name: 'СПА и релакс',
       selected: false,
-      value: 'spa'
+      value: 'spa',
     },
   ]);
+
+  filteredCards = computed(() =>
+    this.selectedFilter() !== this.allStr
+      ? this.cards().filter((card) => card.category === this.selectedFilter())
+      : this.cards(),
+  );
+
+  calculateLikes = computed(() => this.cards().filter((card) => card.liked).length);
+
+  constructor() {
+    const savedLikedCards = localStorage.getItem(this.likedCards);
+    if (savedLikedCards) {
+      const likedCardsArr = JSON.parse(savedLikedCards);
+      this.cards.set(likedCardsArr)
+    }
+
+    effect(() => {
+      const currentLikedCards = this.cards();
+      if (currentLikedCards.length > 0) {
+        localStorage.setItem(this.likedCards, JSON.stringify(currentLikedCards));
+      }
+    });
+  }
 
   toggleCard(card: CardType): void {
     card.isExpanded = !card.isExpanded;
@@ -164,21 +190,26 @@ export class App {
     }
 
     this.filters.update((filters) =>
-      filters.map((filter) =>
-        filter.id === filterToToggle.id
-          ? { ...filter, selected: !filter.selected }
-          : {
-              ...filter,
-              selected: false,
-            },
-      ),
+      filters.map((filter) => ({
+        ...filter,
+        selected: filter.id === filterToToggle.id,
+      })),
     );
 
-
-
+    this.selectFilter(filterToToggle.value);
   }
 
   selectFilter(filterValue: string): void {
     this.selectedFilter.set(filterValue);
   }
+
+  likeCard(cardLiked: CardType): void {
+    this.cards.update((cards) =>
+      cards.map((card) =>
+        cardLiked.id === card.id ? { ...card, liked: !card.liked } : { ...card },
+      ),
+    );
+  }
 }
+
+

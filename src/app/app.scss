@@ -8,8 +8,32 @@
     background-color: #FEFCFC;
 
     &__container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       padding: 22px 0;
     }
+
+    &__favorite {
+      position: relative;
+      &-count {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        right: 0;
+        top: 12px;
+        min-width: 16px;
+        height: 16px;
+        background: #404141;
+        border-radius: 50%;
+        font-size: 10px;
+        line-height: 120%;
+        text-align: center;
+        color: #FFFFFF;
+      }
+    }
+
   }
 
   .hero {

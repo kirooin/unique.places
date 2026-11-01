@@ -11,9 +11,14 @@ import { CardType } from '../../../types/card.type';
 export class PlaceCard {
   card = input.required<CardType>()
   toggled = output<CardType>({alias: 'toggle'})
+  liked = output<CardType>({alias: 'like'});
 
 
   toggle() {
     this.toggled.emit(this.card())
+  }
+
+  like() {
+    this.liked.emit(this.card())
   }
 }
