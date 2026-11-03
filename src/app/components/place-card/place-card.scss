@@ -9,10 +9,6 @@
   transition: max-height 0.2s ease;
 
 
-  &.open {
-    max-height: 1000px;
-  }
-
 
   .card__body > *:not(:last-child), {
     margin-bottom: 12px;
@@ -23,9 +19,7 @@
   }
 
   &__image img{
-
       display: block;
-
   }
 
   &__favorite {

@@ -48,7 +48,11 @@
     <div class="container products__container">
       <div class="products__grid">
         @for (card of filteredCards(); track card.id) {
-          <app-place-card [card]="card" (toggle)="toggleCard($event)" (like)="likeCard($event)" />
+          <app-place-card [card]="card" (like)="likeCard($event)" (open)="openCard($event)" />
+
+          @if(card.isOpen) {
+            <app-place-card-modal [card]="card" (like)="likeCard($event)"></app-place-card-modal>
+          }
         }
 
       </div>
@@ -71,3 +75,5 @@
     </div>
   </footer>
 </main>
+
+

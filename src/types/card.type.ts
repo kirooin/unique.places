@@ -10,7 +10,7 @@ export type CardType = {
   text: string,
   image: string,
   id: number,
-  isExpanded: boolean,
+  isOpen: boolean,
   category: CategoryType,
   liked: boolean,
 }

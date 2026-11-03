@@ -1,4 +1,4 @@
-<div class="card"  [class.open]="card().isExpanded">
+<div class="card" [class.open]="card().isOpen">
   <div class="card__header">
 
     <div class="card__image">
@@ -13,7 +13,7 @@
 
   </div>
 
-  <div class="card__body" [class.open]="card().isExpanded">
+  <div class="card__body" [class.open]="card().isOpen">
     <h3 class="card__title">{{ card().title }}</h3>
     <div class="card__place">{{ card().place }}</div>
     <div class="card__country">{{ card().country }}</div>
@@ -31,13 +31,9 @@
     <div class="card__text">
       {{ card().text }}
     </div>
-    <div class="card__footer" (click)="toggle()">
-      <div class="card__more">
-        @if (card().isExpanded) {
-          Скрыть
-        } @else {
-          Подробнее
-        }
+    <div class="card__footer">
+      <div class="card__more" (click)="open()">
+        Подробнее
       </div>
     </div>
   </div>
