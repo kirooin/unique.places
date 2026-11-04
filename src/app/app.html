@@ -49,14 +49,20 @@
       <div class="products__grid">
         @for (card of filteredCards(); track card.id) {
           <app-place-card [card]="card" (like)="likeCard($event)" (open)="openCard($event)" />
-                  }
+        } @empty {
+          <div class="products__empty">
+            <img src="images/empty.png" alt="Empty">
+            <p>Ничего не найдено</p>
+            <span>В этой категории пока нет уникальных мест</span>
+          </div>
+        }
 
       </div>
     </div>
   </section>
 
   @for (card of filteredCards(); track card.id) {
-    @if(card.isOpen) {
+    @if (card.isOpen) {
       <app-place-card [isModal]="true" [card]="card" (like)="likeCard($event)" (open)="openCard($event)" />
     }
   }

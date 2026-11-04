@@ -1,9 +1,12 @@
-<div class="card__wrapper" [class.card__wrapper--modal]="isModal()">
+@if (isModal()) {
+  <div  [class.card-modal__wrapper]="isModal()">
+  </div>
+}
 
 
-  <div class="card" [class.card--modal]="isModal()" [class.open]="card().isOpen">
+  <div class="card" [class.card-modal]="isModal()" [class.open]="card().isOpen">
     @if (isModal()) {
-      <div class="card__cross" >
+      <div class="card-modal__close" >
         <img src="images/cross.png" alt="cross" (click)="open()">
       </div>
     }
@@ -36,8 +39,7 @@
           <div class="card__badge">{{ badge }}</div>
         }
       </div>
-      <div class="card__text">
-        {{ card().text }}
+      <div class="card__text">{{ card().text }}
       </div>
       @if (!isModal()) {
 
@@ -51,4 +53,3 @@
 
     </div>
   </div>
-</div>
