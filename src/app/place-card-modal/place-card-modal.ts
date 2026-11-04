@@ -5,11 +5,11 @@ import { CardType } from '../../types/card.type';
   selector: 'app-place-card-modal',
   styleUrl: './place-card-modal.scss',
   templateUrl: './place-card-modal.html',
-  standalone: true
+  standalone: true,
 })
 export class PlaceCardModal {
   card = input.required<CardType>();
-  liked = output<CardType>({alias: 'like'});
+  liked = output<CardType>({ alias: 'like' });
   // opened = output<CardType>({alias: 'open'});
   //
   like() {

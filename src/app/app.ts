@@ -1,12 +1,11 @@
-import { Component, computed, effect, OnChanges, OnDestroy, signal } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 import { CardType } from '../types/card.type';
 import { PlaceCard } from './components/place-card/place-card';
 import { FilterType } from '../types/filter.type';
 import { Filters } from './components/filters/filters';
-import { PlaceCardModal } from './place-card-modal/place-card-modal';
 
 @Component({
-  imports: [PlaceCard, Filters, PlaceCardModal],
+  imports: [PlaceCard, Filters],
   selector: 'app-root',
   styleUrl: './app.scss',
   templateUrl: './app.html',

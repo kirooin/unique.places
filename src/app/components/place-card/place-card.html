@@ -1,40 +1,54 @@
-<div class="card" [class.open]="card().isOpen">
-  <div class="card__header">
+<div class="card__wrapper" [class.card__wrapper--modal]="isModal()">
 
-    <div class="card__image">
-      <img src="{{card().image}}" alt="test">
-    </div>
 
-    <div class="card__favorite" (click)="like()" [class.card__favorite_like]="card().liked">
-      <img src="images/favorite_heart.png" alt="Heart">
-    </div>
-
-    <div class="card__label">18+</div>
-
-  </div>
-
-  <div class="card__body" [class.open]="card().isOpen">
-    <h3 class="card__title">{{ card().title }}</h3>
-    <div class="card__place">{{ card().place }}</div>
-    <div class="card__country">{{ card().country }}</div>
-    <div class="card__rating">
-      <div class="card__count">
-        <img src="images/card_star.png" alt="Star"> {{ card().rating }}
+  <div class="card" [class.card--modal]="isModal()" [class.open]="card().isOpen">
+    @if (isModal()) {
+      <div class="card__cross" >
+        <img src="images/cross.png" alt="cross" (click)="open()">
       </div>
-      <div class="card__euros">{{ card().euros }}</div>
+    }
+    <div class="card__header">
+
+      <div class="card__image">
+        <img src="{{card().image}}" alt="test">
+      </div>
+
+      <div class="card__favorite" (click)="like()" [class.card__favorite_like]="card().liked">
+        <img src="images/favorite_heart.png" alt="Heart">
+      </div>
+
+      <div class="card__label">18+</div>
+
     </div>
-    <div class="card__badges">
-      @for (badge of card().badges; let i = $index; track i) {
-        <div class="card__badge">{{ badge }}</div>
+
+    <div class="card__body" [class.open]="card().isOpen">
+      <h3 class="card__title">{{ card().title }}</h3>
+      <div class="card__place">{{ card().place }}</div>
+      <div class="card__country">{{ card().country }}</div>
+      <div class="card__rating">
+        <div class="card__count">
+          <img src="images/card_star.png" alt="Star"> {{ card().rating }}
+        </div>
+        <div class="card__euros">{{ card().euros }}</div>
+      </div>
+      <div class="card__badges">
+        @for (badge of card().badges; let i = $index; track i) {
+          <div class="card__badge">{{ badge }}</div>
+        }
+      </div>
+      <div class="card__text">
+        {{ card().text }}
+      </div>
+      @if (!isModal()) {
+
+        <div class="card__footer">
+          <div class="card__more" (click)="open()">
+            Подробнее
+          </div>
+
+        </div>
       }
-    </div>
-    <div class="card__text">
-      {{ card().text }}
-    </div>
-    <div class="card__footer">
-      <div class="card__more" (click)="open()">
-        Подробнее
-      </div>
+
     </div>
   </div>
 </div>
