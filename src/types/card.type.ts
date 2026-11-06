@@ -5,7 +5,7 @@ export type CardType = {
   place: string,
   country: string,
   rating: string,
-  euros: string,
+  euros: number,
   badges: string[],
   text: string,
   image: string,

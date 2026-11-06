@@ -32,7 +32,7 @@
         <div class="card__count">
           <img src="images/card_star.png" alt="Star"> {{ card().rating }}
         </div>
-        <div class="card__euros">{{ card().euros }}</div>
+        <div class="card__euros">{{ card().euros | currencyLevelPipe }}</div>
       </div>
       <div class="card__badges">
         @for (badge of card().badges; let i = $index; track i) {
