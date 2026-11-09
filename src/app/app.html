@@ -48,7 +48,7 @@
     <div class="container products__container">
       <div class="products__grid">
         @for (card of filteredCards(); track card.id) {
-          <app-place-card [card]="card" (like)="likeCard($event)" (open)="openCard($event)" />
+          <app-place-card [card]="card" (like)="likeCard($event)" (toggle)="toggleModal($event)" />
         } @empty {
           <div class="products__empty">
             <img src="images/empty.png" alt="Empty">
@@ -63,7 +63,7 @@
 
   @for (card of filteredCards(); track card.id) {
     @if (card.isOpen) {
-      <app-place-card [isModal]="true" [card]="card" (like)="likeCard($event)" (open)="openCard($event)" />
+      <app-place-card [isModal]="true" [card]="card" (like)="likeCard($event)" (toggle)="toggleModal($event)" />
     }
   }
   <footer class="footer">

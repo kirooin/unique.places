@@ -1,25 +1,38 @@
 import { Component, input, output } from '@angular/core';
 import { CardType } from '../../../types/card.type';
 import { CurrencyLevelPipe } from '../../shared/pipes/currency-level-pipe';
+import { BadgeLabelPipe } from '../../shared/pipes/badge-label-pipe';
 
 @Component({
   selector: 'app-place-card',
   styleUrl: './place-card.scss',
   templateUrl: './place-card.html',
   standalone: true,
-  imports: [CurrencyLevelPipe],
+  imports: [CurrencyLevelPipe, BadgeLabelPipe],
+  host: {
+    '(document:keydown.escape)': 'closeModalByEscape()',
+  }
 })
 export class PlaceCard {
   card = input.required<CardType>();
-  opened = output<CardType>({ alias: 'open' });
+  toggled = output<CardType>({ alias: 'toggle' });
   liked = output<CardType>({ alias: 'like' });
   isModal = input<boolean>(false);
 
-  open() {
-    this.opened.emit(this.card());
+  toggle(): void {
+    this.toggled.emit(this.card());
   }
 
-  like() {
+  like(): void {
     this.liked.emit(this.card());
   }
+
+  closeModalByEscape(): void {
+    if (this.isModal()) {
+      this.toggle();
+    }
+  }
+
+
+
 }

@@ -3,6 +3,7 @@ import { CardType } from '../types/card.type';
 import { PlaceCard } from './components/place-card/place-card';
 import { FilterType } from '../types/filter.type';
 import { Filters } from './components/filters/filters';
+import { BadgeCode } from '../types/badges.type';
 
 @Component({
   imports: [PlaceCard, Filters],
@@ -26,7 +27,7 @@ export class App {
       country: 'Имеровигли, Греция',
       euros: 3,
       rating: '5.0',
-      badges: ['Скала', 'Панорамный вид', 'Тихое место'],
+      badges: ['rock', 'panorama', 'quiet'],
       text: 'Отель, высеченный прямо в скале над морем, где из каждого номера открывается панорамный вид на бескрайний горизонт. Пространство словно становится частью природного ландшафта, а мягкий свет и натуральные материалы ',
       image: 'images/test_product_img.png',
       id: 1,
@@ -40,7 +41,7 @@ export class App {
       country: 'Мале, Мальдивы',
       euros: 2,
       rating: '4.9',
-      badges: ['Под водой', 'Вид на рыб'],
+      badges: ['underwater', 'fish_view'],
       text: 'Ресторан на глубине 5 метров под водой с панорамным видом на бескрайний океан и его обитателей. Огромные стеклянные стены создают ощущение полного погружения: вокруг проплывают тропические рыбы, а солнечные лучи ',
       image: 'images/aqua_vista.png',
       id: 2,
@@ -54,8 +55,9 @@ export class App {
       country: 'Хаконе, Япония',
       euros: 2,
       rating: '4.7',
-      badges: ['Лес', 'Горячие источники', 'Туман', 'Природные бассейны'],
-      text: 'Уединённый термальный комплекс среди горного леса, где природные бассейны растворяются в утреннем тумане. ' +
+      badges: ['forest', 'hot_springs', 'fog', 'natural_pools'],
+      text:
+        'Уединённый термальный комплекс среди горного леса, где природные бассейны растворяются в утреннем тумане. ' +
         'Природные горячие источники каскадом спускаются по склону, окружённому густой зеленью и скалами. Здесь можно провести несколько часов в тёплой воде, наслаждаясь тишиной, прохладным горным воздухом и шумом небольших водопадов. ',
       image: 'images/mist_springs.png',
       id: 3,
@@ -69,7 +71,7 @@ export class App {
       country: 'Дубай, ОАЭ',
       euros: 1,
       rating: '4.4',
-      badges: ['На крыше', 'Вид на город'],
+      badges: ['rooftop', 'city_view'],
       text: 'Кинотеатр на крыше небоскрёба, где фильмы смотрят под открытым небом на фоне сияющей панорамы ночного города. ',
       image: 'images/skyline_cinema.png',
       id: 4,
@@ -83,7 +85,7 @@ export class App {
       country: 'Матера, Италия',
       euros: 1,
       rating: '4.9',
-      badges: ['Пещеры', 'Иммерсивное искусство'],
+      badges: ['caves', 'immersive_art'],
       text: 'Галерея внутри древних пещер, где произведения искусства оживают с помощью света, звука и проекций прямо на каменных стенах. ',
       image: 'images/echoes_of_stone.png',
       id: 5,
@@ -97,7 +99,7 @@ export class App {
       country: 'Рованиеми, Финляндия',
       euros: 2,
       rating: '4.8',
-      badges: ['Стеклянная крыша', 'Северное сияние'],
+      badges: ['glass_roof', 'northern_lights'],
       text: 'Стеклянные домики посреди заснеженного леса, где северное сияние можно наблюдать прямо из кровати. Панорамные стены и прозрачная крыша открывают вид на звёздное небо и бескрайние снежные пейзажи, сохраняя внутри тепло и уют. ',
       image: 'images/aurora_glass.png',
       id: 6,
@@ -181,8 +183,13 @@ export class App {
     });
   }
 
-  openCard(card: CardType): void {
-    card.isOpen = !card.isOpen;
+  toggleModal(currentCard: CardType): void {
+    this.cards.update((cards) =>
+      cards.map((card) => ({
+        ...card,
+        isOpen: currentCard.id === card.id ? !card.isOpen : card.isOpen,
+      })),
+    );
   }
 
   toggleFilter(filterToToggle: FilterType) {
@@ -212,5 +219,3 @@ export class App {
     );
   }
 }
-
-

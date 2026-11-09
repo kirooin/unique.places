@@ -1,4 +1,5 @@
 import { CategoryType } from './category.type';
+import { BadgeCode } from './badges.type';
 
 export type CardType = {
   title: string,
@@ -6,7 +7,7 @@ export type CardType = {
   country: string,
   rating: string,
   euros: number,
-  badges: string[],
+  badges: BadgeCode[],
   text: string,
   image: string,
   id: number,

@@ -1,13 +1,13 @@
 @if (isModal()) {
-  <div  [class.card-modal__wrapper]="isModal()">
+  <div  [class.card-modal__wrapper]="isModal()" (click)="toggle()">
   </div>
 }
 
 
-  <div class="card" [class.card-modal]="isModal()" [class.open]="card().isOpen">
+  <div class="card" [class.card-modal]="isModal()" [class.open]="card().isOpen" >
     @if (isModal()) {
       <div class="card-modal__close" >
-        <img src="images/cross.png" alt="cross" (click)="open()">
+        <img src="images/cross.png" alt="cross" (click)="toggle()">
       </div>
     }
     <div class="card__header">
@@ -36,7 +36,7 @@
       </div>
       <div class="card__badges">
         @for (badge of card().badges; let i = $index; track i) {
-          <div class="card__badge">{{ badge }}</div>
+          <div class="card__badge">{{ badge | badgeLabel }}</div>
         }
       </div>
       <div class="card__text">{{ card().text }}
@@ -44,7 +44,7 @@
       @if (!isModal()) {
 
         <div class="card__footer">
-          <div class="card__more" (click)="open()">
+          <div class="card__more" (click)="toggle()">
             Подробнее
           </div>
 

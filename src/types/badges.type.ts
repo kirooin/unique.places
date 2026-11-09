@@ -1,0 +1,16 @@
+export type BadgeCode =
+  | 'rock'
+  | 'panorama'
+  | 'quiet'
+  | 'underwater'
+  | 'fish_view'
+  | 'forest'
+  | 'hot_springs'
+  | 'fog'
+  | 'rooftop'
+  | 'city_view'
+  | 'caves'
+  | 'immersive_art'
+  | 'glass_roof'
+  | 'northern_lights'
+  | 'natural_pools';
