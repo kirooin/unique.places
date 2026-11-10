@@ -2,16 +2,17 @@ import { Component, input, output } from '@angular/core';
 import { CardType } from '../../../types/card.type';
 import { CurrencyLevelPipe } from '../../shared/pipes/currency-level-pipe';
 import { BadgeLabelPipe } from '../../shared/pipes/badge-label-pipe';
+import { Tooltip } from '../../shared/ui/tooltip';
 
 @Component({
   selector: 'app-place-card',
   styleUrl: './place-card.scss',
   templateUrl: './place-card.html',
   standalone: true,
-  imports: [CurrencyLevelPipe, BadgeLabelPipe],
+  imports: [CurrencyLevelPipe, BadgeLabelPipe, Tooltip],
   host: {
     '(document:keydown.escape)': 'closeModalByEscape()',
-  }
+  },
 })
 export class PlaceCard {
   card = input.required<CardType>();
@@ -32,7 +33,4 @@ export class PlaceCard {
       this.toggle();
     }
   }
-
-
-
 }

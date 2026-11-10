@@ -8,10 +8,12 @@ export type CardType = {
   rating: string,
   euros: number,
   badges: BadgeCode[],
+  badge?: string,
   text: string,
   image: string,
   id: number,
   isOpen: boolean,
   category: CategoryType,
   liked: boolean,
+
 }

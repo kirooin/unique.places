@@ -4,9 +4,10 @@ import { PlaceCard } from './components/place-card/place-card';
 import { FilterType } from '../types/filter.type';
 import { Filters } from './components/filters/filters';
 import { BadgeCode } from '../types/badges.type';
+import { Tooltip } from './shared/ui/tooltip';
 
 @Component({
-  imports: [PlaceCard, Filters],
+  imports: [PlaceCard, Filters, Tooltip],
   selector: 'app-root',
   styleUrl: './app.scss',
   templateUrl: './app.html',
@@ -18,7 +19,6 @@ export class App {
   allStr = 'all';
 
   selectedFilter = signal<string>(this.allStr);
-  likes = signal<number>(0);
 
   cards = signal<CardType[]>([
     {
@@ -28,6 +28,7 @@ export class App {
       euros: 3,
       rating: '5.0',
       badges: ['rock', 'panorama', 'quiet'],
+      badge: '18+',
       text: 'Отель, высеченный прямо в скале над морем, где из каждого номера открывается панорамный вид на бескрайний горизонт. Пространство словно становится частью природного ландшафта, а мягкий свет и натуральные материалы ',
       image: 'images/test_product_img.png',
       id: 1,
@@ -56,6 +57,7 @@ export class App {
       euros: 2,
       rating: '4.7',
       badges: ['forest', 'hot_springs', 'fog', 'natural_pools'],
+      badge: 'Только по записи',
       text:
         'Уединённый термальный комплекс среди горного леса, где природные бассейны растворяются в утреннем тумане. ' +
         'Природные горячие источники каскадом спускаются по склону, окружённому густой зеленью и скалами. Здесь можно провести несколько часов в тёплой воде, наслаждаясь тишиной, прохладным горным воздухом и шумом небольших водопадов. ',
@@ -86,6 +88,7 @@ export class App {
       euros: 1,
       rating: '4.9',
       badges: ['caves', 'immersive_art'],
+      badge: 'Эксклюзив',
       text: 'Галерея внутри древних пещер, где произведения искусства оживают с помощью света, звука и проекций прямо на каменных стенах. ',
       image: 'images/echoes_of_stone.png',
       id: 5,
