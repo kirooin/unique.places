@@ -15,7 +15,7 @@ export class Tooltip implements OnDestroy {
 
   tooltipText = input('tooltip', { alias: 'appTooltip' });
 
-  show() {
+  show(): void {
     if (!this.tooltipText()) return;
 
     this.tooltip = this.renderer.createElement('span');
@@ -28,14 +28,14 @@ export class Tooltip implements OnDestroy {
     this.renderer.setStyle(this.tooltip, 'left', `${rect.left + rect.width / 2}px`);
   }
 
-  hide() {
+  hide(): void {
     if (this.tooltip) {
       this.renderer.removeChild(document.body, this.tooltip);
       this.tooltip = null;
     }
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.hide()
   }
 
