@@ -195,7 +195,7 @@ export class App {
     );
   }
 
-  toggleFilter(filterToToggle: FilterType) {
+  toggleFilter(filterToToggle: FilterType): void {
     if (filterToToggle.selected === true) {
       return;
     }

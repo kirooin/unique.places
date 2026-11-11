@@ -24,7 +24,7 @@ export class Filters {
   toggled = output<FilterType>({ alias: 'toggle' });
   selected = output<string>({ alias: 'select' });
 
-  toggle() {
+  toggle(): void {
     this.toggled.emit(this.filter());
   }
 }
